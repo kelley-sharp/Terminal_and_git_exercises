@@ -1,0 +1,377 @@
+Git Basics Exercises
+1. Create a folder called learn_git_again.
+
+ 	mkdir learn_git_again
+
+2. cd into the learn_git_again folder.
+
+  	cd learn_git_again
+
+3. Create a file called third.txt.
+
+  	touch third.txt
+
+4. Initialize an empty git repository.
+
+	  git init
+
+5. Add third.txt to the staging area.
+
+	  git add third.txt
+
+6. Commit with the message "adding third.txt".
+
+	  git commit -m "adding third.txt"
+
+7. Check out your commit with git log.
+
+	  git log
+
+8. Create another file called fourth.txt.
+
+	  touch fourth.txt
+
+9. Add fourth.txt to the staging area.
+
+	  git add fourth.txt
+
+10. Commit with the message "adding fourth.txt"
+
+	  git commit -m "adding fourth.txt"
+
+11. Remove the third.txt file.
+
+	  rm third.txt
+
+12. Add this change to the staging area
+
+	  git add third.txt
+
+13. Commit with the message "removing third.txt"
+
+	  git commit -m "removing third.txt"
+
+14. Check out your commits using git log
+
+	  git log --oneline
+
+15. Change your global setting to core.pager=cat - you can read more about that here.
+
+	  git config --global core.pager "cat"
+
+16. Write the command to list all of the global configurations for git on your machine. 
+You can type git config --global to find out how to do this
+
+	  git config --global --list
+
+
+
+
+Checkout and Reset
+1. Create a folder called destruction.
+
+  	mkdir destruction
+
+2. cd into that folder.
+
+	  cd destruction
+
+3. Initialize an empty git repository.
+
+	  git init
+  
+4. Create a file called done.txt.
+
+	  touch done.txt
+
+5. Remove that file from the working directory (remember you can not use git checkout).
+
+	  git clean -df done.txt
+
+6. Create a file called stage_me.txt.
+
+	  touch stage_me.txt
+
+7. Add stage_me.txt file to the staging area.
+
+	  git add stage_me.txt
+
+8. Move stage_me.txt file from the staging area to the working directory.
+
+	  git rm --cached stage_me.txt
+
+9. Add stage_me.txt file to the staging area.
+
+	  git add stage_me.txt 
+
+10. Remove stage_me.txt from the staging area and the working directory.
+
+	  git clean -df stage_me.txt
+
+11. Create a new file called commit_me.txt.
+
+	  touch commit_me.txt
+
+12. Add commit_me.txt to the staging area.
+
+	  git add commit_me.txt
+
+13. Commit with the message "adding commit_me.txt".
+
+	  git commit -m "adding commit_me.txt"
+
+14. Create another file called second.txt.
+
+	  touch second.txt
+
+15. Add second.txt to the staging area.
+
+	  git add second.txt
+
+16. Commit with the message "adding second.txt".
+
+	  git commit -m "adding second.txt"
+
+17. Check out your previous commits using git log --oneline to see the unique identifier or SHA for each of your commits.
+
+	  git log --oneline
+
+18. Using git reset, undo the previous commit and move your changes back to the working directory.
+
+	  git reset --mixed cf52720
+
+19. Add second.txt again.
+
+	  git add second.txt
+
+20. Commit with the message "Trying to commit again".
+
+	  git commit -m "trying to commit again"
+
+21. Using git reset undo the previous commit and move your changes back to the staging area.
+
+	  git reset --soft cf52720
+
+22. Commit with the message "Trying to commit again and again".
+
+	  git commit -m "trying to commit again and again"
+
+23. Using git reset undo the previous commit so that any changes are not part of the working directory.
+
+	  git reset --hard cf52720
+
+24. Pat yourself on the back! You just went through a pretty complex git workflow!
+
+	  Pat pat pat. :)
+
+
+
+Branching
+1. Create a folder called branch_time.
+2. cd into that folder.
+
+	mkdir branch_time && cd branch_time
+
+3. Initialize an empty git repository.
+
+	git init
+
+4. Create a file called first.txt, then add and commit the file.
+
+	touch first.txt && git add first.txt
+	git commit -m "committing first.txt"
+
+5. Create a new branch called amazing_feature.
+
+	git checkout -b amazing_feature
+
+6. Create a file called best.txt.
+
+	touch best.txt
+
+7. Add the file.
+
+	git add best.txt
+
+8. Commit the file with the message -m "added best.txt".
+
+	git commit -m "added best.txt"
+
+9. Switch back to the master branch.
+	
+	git checkout master
+	
+10. Merge your changes from the feature branch into master.
+
+	git merge amazing_feature
+	
+11. Delete the feature branch.
+
+	git branch -D amazing_feature
+
+
+
+
+Branching and Merging Exercises
+Part I
+1. What does git clean do?
+
+	git clean removes files that are untracked or unmarked from the working directory.
+	
+2. What do the -d and -f flags for git clean do?
+
+	-d will remove untracked directories in addition to untracked files from working tree. 
+	-f will force removal of any such files that won't remove otherwise (e.g. file managed by other repository).
+
+3. What git command creates a branch?
+
+	git checkout -b NAME_OF_BRANCH
+
+4. What is the difference between a fast-forward and recursive merge?
+
+	A fast-forward merge is when it is obvious to git how gits were committed chronologically.
+	A recursive merge is the alternative, for example, when commits happen on two different
+	branches.
+
+5. What git command changes to another branch?
+
+	git checkout ANOTHER_BRANCH
+
+6. How do you remove modified or deleted files from the working directory?
+
+	git reset --hard HEAD
+
+7. What git command deletes a branch?
+
+	git branch -D NAME_OF_BRANCH
+
+8. What does the git diff command do?
+
+	git diff shows the changes between two commits.
+
+9. How do you remove files from the staging area?
+
+	git rm --cached NAME_OF_FILE, or git rm -r --cached for directories.
+
+10. How do merge conflicts happen?
+
+	A merge conflict occurs when you commit changes to the same file on two different branches.
+	Git can't tell what changes to commit where.
+	
+	
+Part II
+Create your own merge conflict! Work on the same file on two separate branches and merge the two branches together. Fix the conflicts and finish your merge. In the real world you will never intentionally try to create merge conflicts, but it is important to understand how and why they are created. Most importantly, it's important not to be intimidated by merge conflicts, and to be able to fix them with confidence!
+
+	~                                                                                       
+▶ mkdir merge_conflicts
+
+~                                                                                       
+▶ cd merge_conflicts 
+
+~/merge_conflicts                                                                       
+▶ git init
+Initialized empty Git repository in /Users/kelley/merge_conflicts/.git/
+
+~/merge_conflicts  master ✔                                                             
+▶ echo first > first.txt
+
+~/merge_conflicts  master ✗                                                          ◒  
+▶ git add .
+
+~/merge_conflicts  master ✗                                                          ✚  
+▶ gst
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+	new file:   first.txt
+
+
+~/merge_conflicts  master ✗                                                          ✚  
+▶ git commit -m "first commit"
+[master (root-commit) cce30af] first commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 first.txt
+
+~/merge_conflicts  master ✔                                                         0m  
+▶ gst
+On branch master
+nothing to commit, working tree clean
+
+~/merge_conflicts  master ✔                                                         0m  
+▶ git checkout -b new_branch
+Switched to a new branch 'new_branch'
+
+~/merge_conflicts  new_branch ✔                                                     0m  
+▶ echo second > second.txt
+
+~/merge_conflicts  new_branch ✗                                                   0m ◒  
+▶ git add . 
+
+~/merge_conflicts  new_branch ✗                                                   0m ✚  
+▶ git commit -m "adding second.txt"
+[new_branch c79f615] adding second.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 second.txt
+
+~/merge_conflicts  new_branch ✔                                                     0m  
+▶ gst
+On branch new_branch
+nothing to commit, working tree clean
+
+~/merge_conflicts  new_branch ✔                                                     0m  
+▶ git checkout master
+Switched to branch 'master'
+
+~/merge_conflicts  master ✔                                                         1m  
+▶ echo something_else > second.txt
+
+~/merge_conflicts  master ✗                                                       1m ◒  
+▶ git add .
+
+~/merge_conflicts  master ✗                                                       1m ✚  
+▶ gst
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   second.txt
+
+
+~/merge_conflicts  master ✗                                                       1m ✚  
+▶ git commit -m "adding second.txt on the master branch"
+[master ef490a8] adding second.txt on the master branch
+ 1 file changed, 1 insertion(+)
+ create mode 100644 second.txt
+
+~/merge_conflicts  master ✔                                                         0m  
+▶ git merge new_branch
+Auto-merging second.txt
+CONFLICT (add/add): Merge conflict in second.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+▶ cat second.txt
+<<<<<<< HEAD
+something_else
+=======
+second
+>>>>>>> new_branch
+
+~/merge_conflicts  master ✗                                                         2m  
+▶ open second.txt 
+
+#(Deleted all, but "second")
+
+~/merge_conflicts  master ✗                                                         3m  
+▶ git add . 
+
+~/merge_conflicts  master ✗                                                       3m ✚  
+▶ git commit -m "fixing merge conflict"
+[master 28e72c9] fixing merge conflict
+
+
+
+
